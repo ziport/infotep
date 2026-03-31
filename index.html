@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GitGuía – Aprende Git & GitHub sin complicaciones</title>
+
+  <!-- Google Fonts: Roboto + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- AOS – Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+
+  <!-- Prism.js – Syntax highlighting (tema Okaidia/dark) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet"/>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80">
+
+  <!-- ═══════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════ -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <span class="brand-icon">⑂</span> GitGuía
+      </a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="#que-es">¿Qué es?</a></li>
+          <li class="nav-item"><a class="nav-link" href="#diferencias">Diferencias</a></li>
+          <li class="nav-item"><a class="nav-link" href="#como-funciona">Cómo funciona</a></li>
+          <li class="nav-item"><a class="nav-link" href="#comandos">Comandos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#flujo">Flujo</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-nav-cta" href="https://github.com" target="_blank">
+              Ir a GitHub →
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero-section" id="inicio">
+    <div class="hero-particles" id="particles"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center min-vh-100 py-5">
+
+        <!-- Texto -->
+        <div class="col-lg-6 hero-text">
+          <div class="hero-badge mb-3" data-aos="fade-down" data-aos-delay="100">
+            🚀 Guía para principiantes
+          </div>
+          <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+            Aprende <span class="text-accent">Git</span> &
+            <span class="text-accent2">GitHub con el Equipo 4</span><br/>
+            <span id="typed-text"></span>
+          </h1>
+          <p class="hero-desc" data-aos="fade-up" data-aos-delay="300">
+            Sin términos raros, sin complicaciones.
+            Entiende cómo guardar tu código, colaborar con otros
+            y nunca perder tu trabajo.
+          </p>
+          <div class="d-flex gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="400">
+            <a href="#que-es" class="btn btn-hero-primary">Comenzar →</a>
+            <a href="#comandos" class="btn btn-hero-outline">Ver comandos</a>
+          </div>
+        </div>
+
+        <!-- Terminal animada -->
+        <div class="col-lg-6 d-flex justify-content-center mt-5 mt-lg-0"
+             data-aos="fade-left" data-aos-delay="300">
+          <div class="terminal-window">
+            <div class="terminal-topbar">
+              <span class="tb-dot red"></span>
+              <span class="tb-dot yellow"></span>
+              <span class="tb-dot green"></span>
+              <span class="tb-label">bash — gitguia</span>
+            </div>
+            <div class="terminal-body" id="terminalLines">
+              <!-- Líneas inyectadas por JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Ola divisoria -->
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="var(--clr-section-light)"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ¿QUÉ ES?
+  ═══════════════════════════════════════ -->
+  <section class="section-light py-6" id="que-es">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow">Conceptos básicos</span>
+        <h2 class="section-title">¿Qué son Git y GitHub?</h2>
+        <p class="section-sub">No son lo mismo — y entender la diferencia lo cambia todo.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Git -->
+        <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+          <div class="concept-card card-git h-100">
+            <div class="cc-icon">🗂️</div>
+            <h3>Git</h3>
+            <p>
+              Imagina que estás escribiendo una tesis. <strong>Git</strong> es como
+              tener un botón mágico de <em>"guardar versión"</em> que recuerda
+              cada cambio que hiciste: qué modificaste, cuándo y por qué.
+            </p>
+            <p>
+              Si algo sale mal, puedes regresar a cualquier punto anterior.
+              ¡Vive en tu propia computadora y no necesita internet!
+            </p>
+            <div class="analogy-chip">
+              💡 <strong>Analogía:</strong> Es el "Ctrl+Z" más poderoso del mundo, pero para tu código.
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub -->
+        <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+          <div class="concept-card card-github h-100">
+            <div class="cc-icon">☁️</div>
+            <h3>GitHub</h3>
+            <p>
+              GitHub es una <strong>plataforma en internet</strong> donde guardas
+              tu código (con todo el historial de Git) en la nube.
+              Es como Google Drive, pero diseñado para programadores.
+            </p>
+            <p>
+              Además, te permite trabajar con otras personas en el mismo
+              proyecto sin pisarse los pies. ¡Como Google Docs para código!
+            </p>
+            <div class="analogy-chip">
+              💡 <strong>Analogía:</strong> Es la bodega en la nube donde guardas y compartes tu trabajo.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DIFERENCIAS
+  ═══════════════════════════════════════ -->
+  <section class="section-dark py-6" id="diferencias">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow light">Comparación</span>
+        <h2 class="section-title light">Git vs GitHub</h2>
+        <p class="section-sub light">¿Cuál es la diferencia real?</p>
+      </div>
+
+      <div class="diff-table-wrap" data-aos="zoom-in" data-aos-delay="100">
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="col-git">🗂️ Git</th>
+              <th class="col-github">☁️ GitHub</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">¿Qué es?</td>
+              <td>Programa que instalas en tu PC</td>
+              <td>Sitio web / plataforma en línea</td>
+            </tr>
+            <tr>
+              <td class="td-label">¿Dónde vive?</td>
+              <td>En tu computadora local</td>
+              <td>En internet (la nube)</td>
+            </tr>
+            <tr>
+              <td class="td-label">¿Para qué sirve?</td>
+              <td>Controlar versiones de tu código</td>
+              <td>Compartir y colaborar en proyectos</td>
+            </tr>
+            <tr>
+              <td class="td-label">¿Necesita internet?</td>
+              <td>❌ No</td>
+              <td>✅ Sí</td>
+            </tr>
+            <tr>
+              <td class="td-label">¿Trabaja solo?</td>
+              <td>✅ Funciona sin GitHub</td>
+              <td>❌ Necesita Git para funcionar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="diff-note text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+        👉 En resumen: <strong>Git</strong> es la herramienta — <strong>GitHub</strong> es donde la usas con otros.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CÓMO FUNCIONA
+  ═══════════════════════════════════════ -->
+  <section class="section-light py-6" id="como-funciona">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow">Proceso</span>
+        <h2 class="section-title">¿Cómo funciona en la vida real?</h2>
+        <p class="section-sub">El flujo de trabajo típico paso a paso.</p>
+      </div>
+
+      <div class="steps-list">
+        <div class="step-item" data-aos="fade-right" data-aos-delay="0">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h5>Creas o clonas un repositorio</h5>
+            <p>Un repositorio ("repo") es la carpeta del proyecto. Lo inicias desde cero con <code>git init</code> o lo copias de GitHub con <code>git clone</code>.</p>
+          </div>
+        </div>
+        <div class="step-connector" data-aos="fade-up" data-aos-delay="50">↓</div>
+
+        <div class="step-item" data-aos="fade-right" data-aos-delay="100">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h5>Creas una rama (branch)</h5>
+            <p>Una rama es una copia paralela donde puedes trabajar sin afectar el código principal de los demás. Como un borrador propio.</p>
+          </div>
+        </div>
+        <div class="step-connector" data-aos="fade-up" data-aos-delay="150">↓</div>
+
+        <div class="step-item" data-aos="fade-right" data-aos-delay="200">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h5>Haces cambios y los confirmas (commit)</h5>
+            <p>Modificas archivos y los "confirmas" con un mensaje. Es como guardar con una nota que explica qué cambiaste y por qué.</p>
+          </div>
+        </div>
+        <div class="step-connector" data-aos="fade-up" data-aos-delay="250">↓</div>
+
+        <div class="step-item" data-aos="fade-right" data-aos-delay="300">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h5>Subes a GitHub (push)</h5>
+            <p>Envías tus commits al repositorio en internet para que otros los vean y descarguen.</p>
+          </div>
+        </div>
+        <div class="step-connector" data-aos="fade-up" data-aos-delay="350">↓</div>
+
+        <div class="step-item" data-aos="fade-right" data-aos-delay="400">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h5>Creas un Pull Request</h5>
+            <p>Le dices a tu equipo: "Revisad lo que hice y, si está bien, incluidlo en el proyecto principal." Es la base del trabajo colaborativo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       COMANDOS
+  ═══════════════════════════════════════ -->
+  <section class="section-dark py-6" id="comandos">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow light">Referencia rápida</span>
+        <h2 class="section-title light">Comandos esenciales</h2>
+        <p class="section-sub light">Los que más vas a usar. ¡Guárdatelos!</p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="cmd-filters d-flex flex-wrap justify-content-center gap-2 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="basico">Básicos</button>
+        <button class="filter-btn" data-filter="ramas">Ramas</button>
+        <button class="filter-btn" data-filter="remoto">Remoto</button>
+      </div>
+
+      <div class="row g-3" id="comandosGrid">
+        <!-- Inyectado por script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FLUJO COLABORATIVO
+  ═══════════════════════════════════════ -->
+  <section class="section-light py-6" id="flujo">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow">Trabajo en equipo</span>
+        <h2 class="section-title">Flujo colaborativo con GitHub</h2>
+        <p class="section-sub">Cómo trabajan los equipos reales de desarrollo.</p>
+      </div>
+
+      <div class="flow-wrap" data-aos="fade-up" data-aos-delay="100">
+        <div class="flow-node node-main">
+          <span class="fn-tag">main</span>
+          <p>Código estable del proyecto</p>
+        </div>
+
+        <div class="flow-arrow-v">↓ cada quien crea su rama</div>
+
+        <div class="row g-3 justify-content-center mb-3">
+          <div class="col-md-4" data-aos="fade-right" data-aos-delay="150">
+            <div class="flow-node node-branch">
+              <span class="fn-tag tag-b1">feature/navbar</span>
+              <p>Estudiante A trabaja en la sección de navegación</p>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="flow-node node-branch">
+              <span class="fn-tag tag-b2">feature/hero</span>
+              <p>Estudiante B trabaja en la sección principal</p>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-left" data-aos-delay="250">
+            <div class="flow-node node-branch">
+              <span class="fn-tag tag-b3">feature/footer</span>
+              <p>Estudiante C trabaja en el pie de página</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-arrow-v" data-aos="fade-up" data-aos-delay="300">↓ commits + push + Pull Request</div>
+
+        <div class="flow-node node-review" data-aos="zoom-in" data-aos-delay="350">
+          <span class="fn-tag tag-review">🔍 Code Review</span>
+          <p>Un compañero revisa los cambios antes de aceptarlos</p>
+        </div>
+
+        <div class="flow-arrow-v" data-aos="fade-up" data-aos-delay="400">↓ merge aprobado</div>
+
+        <div class="flow-node node-merge" data-aos="zoom-in" data-aos-delay="450">
+          <span class="fn-tag tag-merge">✅ Merge a main</span>
+          <p>Los cambios se integran al proyecto principal 🎉</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container text-center py-4">
+      <p class="mb-1">
+        <span class="brand-icon">⑂</span>
+        <strong>GitGuía</strong> — Proyecto colaborativo de clase
+      </p>
+      <p class="footer-sub">
+        Bootstrap 5 · AOS · Prism.js · Typed.js · Google Fonts Roboto + JetBrains Mono
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════ -->
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <!-- Prism.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <!-- Script propio -->
+  <script src="js/script.js"></script>
+</body>
+</html>
